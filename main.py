@@ -1,4 +1,4 @@
-
+import requests
 
 '''
 常數區塊
@@ -12,7 +12,7 @@ TARGET_PAGE = '/index'
 # 目標頁面的頁面的附屬檔名
 HTML_EXT = '.html'
 
-headers = {
+HEADERS = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
 }
 
@@ -28,3 +28,15 @@ target_board = 'Stock'
 
 # 合併完整路徑
 target = BASE_URL + target_board + TARGET_PAGE + page_num + HTML_EXT
+
+
+def download_html(target, headers=HEADERS):
+    # data = requests.get(target, headers=headers)
+    # return data
+    return requests.get(target, headers=headers)
+
+"""
+test
+"""
+x = download_html(target)
+print(x.content)
