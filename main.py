@@ -137,24 +137,26 @@ def send_line_notify(msg = "傳送訊息"):
 # 爬蟲主程式
 def main():
     if len(sys.argv) < 2:
-        print("缺少參數 : 目標爬蟲看板")
+        print("缺少參數: 爬蟲目標看板")
         sys.exit()
     elif len(sys.argv) == 2:
-        print("未指定看板目標頁數，因此爬取最新資訊")
+        print("未指定看版目標頁數，因此爬取最新資訊")
         page_num = ""
     else:
         page_num = sys.argv[2]
-        
-    target_board = sys.argv[1]   
-    
+   
+    target_board = sys.argv[1]
+
+
     # 合併完整路徑
     target = BASE_URL + target_board + TARGET_PAGE + page_num + HTML_EXT
-    
+
+
     board_info = download_html(target)
     article_url_list = get_article_url(board_info)
     article_data = parser_article_content(article_url_list)
     save_result(article_data,'excel')
-    send_line_notify("{} : 看板 {} 完成爬蟲".format(get_datetime_str(), target_board))
+    send_line_notify("{}: 看板 {} 完成爬蟲".format(get_datetime_str(), target_board))
     print("爬蟲完成")
     return True
 
